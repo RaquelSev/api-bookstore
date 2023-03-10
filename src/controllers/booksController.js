@@ -8,6 +8,18 @@ class BookController {
         })
     }
 
+    static listBookById = (req, res) => {
+        const id = req.params.id;
+
+        books.findById(id, (err, books) => {
+            if(err) {
+                res.status(400).send({message: `${err.message} - Id not found`})
+            } else {
+                res.status(200).send(books)
+            }
+        })
+    }
+
     static registeredBook = (req, res) => 
     {
         let book = new books(req.body);
@@ -19,6 +31,19 @@ class BookController {
             }
         })
     }
+
+    static updateBook = (req, res) => {
+        const id = req.params.id;
+
+        books.findByIdAndUpdate(id, {$set: req.body}, (err) => {
+            if(!err) {
+                res.status(200).send({message: 'Book updated'})
+            } else {
+                res.status(500).send({message: err.message})
+            }
+        })
+    }
+
 }
 
 export default BookController;
