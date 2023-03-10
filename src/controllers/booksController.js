@@ -3,7 +3,9 @@ import books from "../models/Book.js";
 class BookController {
     
     static listBooks = (req, res) => {
-        books.find((err, books) => {
+        books.find()
+        .populate('authors')
+        .exec((err, books) => {
             res.status(200).json(books)
         })
     }
