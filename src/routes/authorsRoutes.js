@@ -10,3 +10,4 @@ router
     .put('/authors/:id', AuthorController.updateAuthor)
     .delete('/authors/:id', AuthorController.deleteAuthor)
 
+export default router;
